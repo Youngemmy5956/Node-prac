@@ -20,7 +20,8 @@ router.post("/auth/register", async (req, res) => {
        return res
        .status(400)
        .json({message: "User already exist"});
-       console.log('User exist')
+      //  alert('User already exist')
+      //  console.log('User exist')
   }
   try {
     bcrypt.hash(password, 10).then(async (hash) => {
