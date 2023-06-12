@@ -19,7 +19,8 @@ router.post("/auth/register", async (req, res) => {
   }
   try {
     bcrypt.hash(password, 10).then(async (hash) => {
-      await Model.create({ firstName, lastName, email, password: hash }).then(
+      await Model.create({ firstName, lastName, email, password: hash })
+      .then(
         (user) => {
           const maxAge = 3 * 60 * 60;
           const token = jwt.sign(
@@ -29,6 +30,15 @@ router.post("/auth/register", async (req, res) => {
           );
           res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
           res.status(201).json({ message: "User successfully created", user });
+        //   if (email===email) {
+        //     return res
+        //       .status(400)
+        //       .json({ message: "Email already exists" });
+//           const doesEmailExist = await email.findOne({ email });
+// if (doesEmailExist) {
+//    throw new Error("Email already exists"); 
+// }
+
         }
       );
     });
