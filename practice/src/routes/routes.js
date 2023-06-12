@@ -16,6 +16,11 @@ router.post("/auth/register", async (req, res) => {
     return res
       .status(400)
       .json({ message: "password is less than 8 characters" });
+  }if (email === email){
+       return res
+       .status(400)
+       .json({message: "User already exist"});
+       console.log('User exist')
   }
   try {
     bcrypt.hash(password, 10).then(async (hash) => {
